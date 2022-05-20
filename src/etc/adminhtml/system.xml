@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bss" translate="label" sortOrder="300">
+            <label><![CDATA[Bss Commerce]]></label>
+        </tab>
+        <section id="hyva_compat_base" translate="label" showInStore="1" showInWebsite="1" showInDefault="1">
+            <label>Hyvä Theme Compat Base</label>
+            <tab>bss</tab>
+            <resource>Bss_HyvaCompatBase::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>General</label>
+                <field id="bss_module_enabled" type="select" translate="label comment" sortOrder="10" canRestore="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Has Bss Modules Enabled?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If has any Bss Commerce modules Enabled, so need Enabled this config!]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

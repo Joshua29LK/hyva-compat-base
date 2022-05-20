@@ -1,0 +1,35 @@
+<?php
+declare(strict_types=1);
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+use Magento\Framework\Escaper;
+use Hyva\BssRewardPoint\Block\CustomerMenuLink;
+
+/** @var Escaper $escaper */
+/** @var CustomerMenuLink $block */
+
+?>
+<a class="<?= $escaper->escapeHtmlAttr(implode(" ", $block->getCss())) ?>"
+   href="<?= $escaper->escapeUrl($block->getLink()) ?>"
+   title="<?= $escaper->escapeHtmlAttr($block->getLinkTitle()) ?>"
+   <?= /** @noEscape */ !empty($block->getLinkTarget()) ? "target=\"{$block->getLinkTarget()}\"" : "" ?>
+>
+    <?= $block->getChildHtml('customer_menu_item_before_link_text') ?>
+    <?= $escaper->escapeHtml($block->getLinkText()); ?>
+    <?= $block->getChildHtml('customer_menu_item_after_link_text') ?>
+</a>
