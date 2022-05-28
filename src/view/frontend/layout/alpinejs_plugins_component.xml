@@ -17,13 +17,11 @@
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
     <body>
-        <referenceBlock name="cart_main_js" class="Bss\HyvaCompatBase\Block\Checkout\Cart\CartJs">
-            <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
-                <argument name="template" xsi:type="string">Bss_HyvaCompatBase::checkout/cart/js/cart.phtml</argument>
-            </action>
+        <referenceBlock name="script-alpine-js">
+            <block name="alpine-plugin-component" template="Bss_HyvaCompatBase::page/js/plugins/component.phtml" before="-"/>
         </referenceBlock>
     </body>
-</page>
+</layout>
