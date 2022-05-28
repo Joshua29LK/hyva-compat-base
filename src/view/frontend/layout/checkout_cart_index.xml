@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="cart_main_js" class="Bss\HyvaCompatBase\Block\Checkout\Cart\CartJs">
+            <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
+                <argument name="template" xsi:type="string">Bss_HyvaCompatBase::checkout/cart/js/cart.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>
