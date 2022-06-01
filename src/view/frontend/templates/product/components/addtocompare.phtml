@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Magento\Catalog\Model\Product;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+
+/** @var Product $product */
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+$product = $block->getData('product');
+$productId = $product->getId();
+/** @var HeroiconsOutline $heroiconsOutline */
+$heroiconsOutline = $viewModels->require(HeroiconsOutline::class);
+?>
+
+<button x-data="initCompareOnProductList()"
+        @click.prevent="addToCompare(<?= (int)$productId ?>)"
+        aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Compare')) ?>"
+        type="button"
+        class="rounded-full w-9 h-9 bg-gray-200 p-0 border-0 inline-flex flex-shrink-0 items-center justify-center text-gray-500 hover:text-yellow-500 ml-2">
+    <?= $heroiconsOutline->scaleHtml("w-5 h-5", 25, 25) ?>
+</button>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product_list_item">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Bss_HyvaCompatBase::product/list/item.phtml</argument>
+            </action>
+
+            <block name="product.info.actions.addtocart" template="Bss_HyvaCompatBase::product/components/addtocart.phtml" />
+            <block name="product.info.actions.addtowishlist" template="Bss_HyvaCompatBase::product/components/addtowishlist.phtml" />
+            <block name="product.info.actions.addtocompare" template="Bss_HyvaCompatBase::product/components/addtocompare.phtml" />
+
+            <container name="product.info.details.before" />
+            <container name="product.info.details.after" />
+            <container name="product.info.prices.before" />
+            <container name="product.info.prices.after" />
+            <container name="product.info.actions.after" />
+            <container name="product.info.actions.before" />
+        </referenceBlock>
+    </body>
+</page>

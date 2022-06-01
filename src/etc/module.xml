@@ -21,6 +21,7 @@
     <module name="Bss_HyvaCompatBase">
         <sequence>
             <module name="Hyva_Theme"/>
+            <module name="Magento_Catalog"/>
         </sequence>
     </module>
 </config>

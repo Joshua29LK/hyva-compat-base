@@ -1,0 +1,37 @@
+<?php
+declare(strict_types=1);
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Magento\Catalog\Model\Product;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Hyva\Theme\Model\ViewModelRegistry;
+
+/** @var Product $product */
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+$product = $block->getData('product');
+$viewIsGrid = $block->getData('view_is_grid');
+/** @var HeroiconsOutline $heroiconsOutline */
+$heroiconsOutline = $viewModels->require(HeroiconsOutline::class);
+?>
+
+<?php if ($product->isSaleable()): ?>
+    <button class="w-auto btn btn-primary justify-center text-sm
+            <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>"
+            aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+    >
+        <?= $heroiconsOutline->shoppingCartHtml("h-6 w-6 border-current inline", 25, 25) ?>
+        <span class="ml-2 inline <?= $viewIsGrid ? 'md:ml-0 md:hidden lg:ml-2 lg:inline' : '' ?>">
+            <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+        </span>
+    </button>
+<?php endif; ?>
