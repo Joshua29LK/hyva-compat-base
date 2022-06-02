@@ -44,8 +44,8 @@
                     </arguments>
                 </block>
                 <block class="Bss\HyvaCompatBase\Block\Customer\Menu\CustomerMenuLink"
-                       name="customer.wishlist"
-                       as="customer_wishlist"
+                       name="customer.menu.wishlist"
+                       as="customer_menu_wishlist"
                        template="Bss_HyvaCompatBase::header/customer-menu/link-default.phtml">
                     <arguments>
                         <argument name="link_text" xsi:type="string" translate="true">My Wishlist</argument>
