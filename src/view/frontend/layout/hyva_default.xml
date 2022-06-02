@@ -116,5 +116,9 @@
                 </block>
             </block>
         </referenceBlock>
+
+        <referenceContainer name="before.body.end">
+            <block name="bss.XMLHttpRequest.response.handler" template="Bss_HyvaCompatBase::page/js/xmlHttpRequest-handler.phtml" />
+        </referenceContainer>
     </body>
 </page>
