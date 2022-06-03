@@ -5,6 +5,7 @@
 
 - Template của block `header.customer` được override sang `Bss_HyvaCompatBase::header/customer-menu.phtml`
 - Template của block `product_list_item` được override sang `Bss_HyvaCompatBase::product/list/item.phtml`
+- Thêm `responseSerialize` cho fetch API.
 - Thêm plugin `component.js` cho AlpineJS.
 
 ## Chi Tiết

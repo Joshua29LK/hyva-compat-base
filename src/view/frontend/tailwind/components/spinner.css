@@ -1,0 +1,47 @@
+:root {
+    --spinner-size: 12px;
+}
+
+.lds-ripple[hidden] {
+    @apply hidden;
+}
+.lds-ripple {
+    @apply inline-block relative w-[calc(var(--spinner-size)*2)] h-[calc(var(--spinner-size)*2)];
+}
+.lds-ripple div {
+    @apply absolute border-[0.5px] border-white opacity-100 rounded-[50%];
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+    0% {
+        top: var(--spinner-size);
+        left: var(--spinner-size);
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    4.9% {
+        top: var(--spinner-size);
+        left: var(--spinner-size);
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    5% {
+        top: var(--spinner-size);
+        left: var(--spinner-size);
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        width: calc(var(--spinner-size) * 2);
+        height: calc(var(--spinner-size) * 2);
+        opacity: 0;
+    }
+}
