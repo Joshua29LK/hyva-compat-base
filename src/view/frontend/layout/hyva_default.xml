@@ -20,6 +20,17 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceBlock name="header-content">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Bss_HyvaCompatBase::html/header.phtml</argument>
+            </action>
+
+            <block name="header-content.compare-link" template="Bss_HyvaCompatBase::header/compare-link.phtml" />
+            <container name="cart.icon.before" />
+            <container name="cart.icon.after" />
+            <container name="cart.drawer.after" />
+        </referenceBlock>
+
         <referenceBlock name="header.customer">
              <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
                  <argument name="template" xsi:type="string">Bss_HyvaCompatBase::header/customer-menu.phtml</argument>

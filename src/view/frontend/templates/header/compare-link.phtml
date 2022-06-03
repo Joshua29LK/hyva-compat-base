@@ -1,0 +1,76 @@
+<?php
+declare(strict_types=1);
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+/** @var Template $block */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+?>
+<script>
+    function initCompareHeader() {
+        return {
+            compareProducts: null,
+            itemCount: 0,
+            receiveCompareData(data) {
+                if (data['compare-products']) {
+                    this.compareProducts = data['compare-products'];
+                    this.itemCount = this.compareProducts.count;
+                }
+            }
+        }
+    }
+</script>
+<a id="compare-link"
+   class="relative invisible inline-block mx-1 no-underline sm:ml-3 hover:text-black"
+   :class="{ 'invisible': !(itemCount > 0) }"
+   href="<?= $escaper->escapeUrl($block->getUrl('catalog/product_compare/index')) ?>"
+   title="<?= $escaper->escapeHtml(__('Compare Products')) ?>"
+   x-data="initCompareHeader()"
+   @private-content-loaded.window="receiveCompareData($event.detail.data)"
+>
+    <?= $heroicons->scaleHtml(
+        "w-8 h-8 md:h-6 md:w-6 hover:text-black",
+        25,
+        25
+    ) ?>
+
+    <span class="sr-only label">
+       <?= $escaper->escapeHtml(__('Compare Products')) ?>
+    </span>
+
+    <span class="absolute top-0 right-0 h-5 px-2 py-1 -mt-5 -mr-4 text-xs font-semibold
+        leading-none text-center text-white uppercase transform -translate-x-1
+        translate-y-1/2 bg-yellow-500 rounded-full"
+    >
+        <span x-text="itemCount"></span>
+        <span x-show="itemCount === 1" class="sr-only">
+            <?= $escaper->escapeHtml(__('item')) ?>
+        </span>
+        <span x-show="itemCount > 1" class="sr-only">
+            <?= $escaper->escapeHtml(__('items')) ?>
+        </span>
+    </span>
+</a>
