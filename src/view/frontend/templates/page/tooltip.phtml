@@ -1,0 +1,82 @@
+<?php
+declare(strict_types=1);
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_HyvaCompatBase
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+// @codingStandardsIgnoreFile
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Bss\HyvaCompatBase\Block\Tooltip as Template;
+
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+/** @var Template $block */
+
+$uniqueId = $block->getTooltipId();
+$modalWidth = $block->getTooltipWidth();
+$modalMobileWidth = $block->getTooltipWidth('mobile');
+?>
+<script>
+    'use strict';
+
+    function <?= $escaper->escapeJs($block->getJsFuncName()) ?>() {
+        return {
+            show: false,
+            modalWidth: <?= $modalWidth ?>,
+            modalWidthMobile: <?= $block->jsonSerialize($modalMobileWidth) ?>,
+            displayTooltip ($el) {
+                if (!this.show) {
+                    return false;
+                }
+
+                if ($el === null || $el === undefined) {
+                    $el = this.$el;
+                }
+
+                const screenW = window.screen.availWidth;
+                const tooltipContentD = $el.querySelector('[bss-tooltip-<?= $escaper->escapeHtmlAttr($uniqueId) ?>-content]');
+                const tooltipIndicator = tooltipContentD.querySelector('.tooltip-indicator');
+                const whatIsThisPos = $el.getBoundingClientRect();
+
+                if (tooltipContentD) {
+                    let tooltipIndicatorPos = whatIsThisPos.width / 2;
+
+                    // Nếu width của màn hình mà nhỏ hơn 500px thì tooltip content sẽ lấy full width
+                    tooltipContentD.style.width = screenW <= this.modalWidth ?
+                        this.modalWidthMobile :
+                        `${this.modalWidth}px`;
+
+                    // Trường hợp bị tràn tooltip ra ngoài
+                    if (whatIsThisPos.left + this.modalWidth > screenW) {
+                        tooltipContentD.style['left'] = `-${this.modalWidth - (screenW - whatIsThisPos.left)}px`;
+                        tooltipIndicator.style.left = `calc(${this.modalWidth - (screenW - whatIsThisPos.left) + tooltipIndicatorPos}px - 0.5rem)`;
+
+                        // Trường hợp bị tràn tooltip ra ngoài nhưng màn hình lại nhỏ hơn 500px
+                        if (screenW <= this.modalWidth) {
+                            tooltipContentD.style['left'] = `-${whatIsThisPos.left}px`;
+                            tooltipIndicator.style.left = ((whatIsThisPos.left + tooltipIndicatorPos) / screenW) * 100 + '%';
+                        }
+                    } else {
+                        // trường hợp bình thường
+                        tooltipContentD.style['left'] = 0;
+                        tooltipIndicator.style.left = 'auto';
+                    }
+                }
+            }
+        }
+    }
+</script>
