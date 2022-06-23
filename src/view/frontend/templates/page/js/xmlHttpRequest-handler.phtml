@@ -37,4 +37,44 @@ use Magento\Framework\View\Element\Template;
             throw new Error('<?= __('Something went wrong. Please contact the website admin for more information.') ?>');
         }
     }
+
+    if (typeof window.buildRestAPIUrl !== 'function') {
+        window.buildRestAPIUrl = function (url, params) {
+            const method = 'rest',
+                storeCode = window.checkoutConfig.storeCode,
+                version = 'V1',
+                serviceUrl = ':method/:storeCode/:version';
+
+            let urlParts;
+
+            params.method = method;
+            params.storeCode = storeCode;
+            params.version = version;
+
+            url = serviceUrl + url;
+
+            urlParts = url.split('/');
+            urlParts = urlParts.filter(Boolean);
+
+            Object.entries(urlParts).forEach (entry => {
+                let [key, part] = entry;
+                part = part.replace(':', '');
+
+                if (params[part] !== undefined) {
+                    urlParts[key] = params[part];
+                }
+            });
+
+            return urlParts.join('/');
+        }
+    }
+
+    if (typeof window.isObjectEmpty !== 'function') {
+        window.isObjectEmpty = function (obj) {
+            return (
+                Object.prototype.toString.call(obj) === '[object Object]' &&
+                JSON.stringify(obj) === '{}'
+            );
+        }
+    }
 </script>
