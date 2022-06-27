@@ -34,12 +34,26 @@ use Magento\Framework\View\Element\Template;
         } else if (response.ok) {
             return response.json();
         } else {
-            throw new Error('<?= __('Something went wrong. Please contact the website admin for more information.') ?>');
+            // Check if result is Promise then throw to new Error
+            let defaultErrMsg = '<?= __('Something went wrong. Please contact the website admin for more information.') ?>';
+            let result = response.json();
+            if (typeof result?.then === 'function') {
+                result.then(res => {
+                    window.dispatchMessages([
+                        {
+                            type: 'error',
+                            text: res?.message ? res.message : defaultErrMsg
+                        }
+                    ], 3000);
+                });
+            } else {
+                throw new Error(defaultErrMsg);
+            }
         }
     }
 
     if (typeof window.buildRestAPIUrl !== 'function') {
-        window.buildRestAPIUrl = function (url, params) {
+        window.buildRestAPIUrl = function (url, params = {}) {
             const method = 'rest',
                 storeCode = window.checkoutConfig.storeCode,
                 version = 'V1',
