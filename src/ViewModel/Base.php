@@ -21,18 +21,23 @@ namespace Bss\HyvaCompatBase\ViewModel;
 
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class Base implements ArgumentInterface
 {
     protected Json $jsonSerializer;
+    protected StoreManagerInterface $storeManager;
 
     /**
      * @param Json $jsonSerializer
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
-        Json $jsonSerializer
+        Json $jsonSerializer,
+        StoreManagerInterface $storeManager
     ) {
         $this->jsonSerializer = $jsonSerializer;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -44,5 +49,16 @@ class Base implements ArgumentInterface
     public function serialize(array $array): string
     {
         return $this->jsonSerializer->serialize($array);
+    }
+
+    /**
+     * Get current store
+     *
+     * @return \Magento\Store\Api\Data\StoreInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getStore()
+    {
+        return $this->storeManager->getStore();
     }
 }

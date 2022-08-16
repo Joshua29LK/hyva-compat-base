@@ -127,7 +127,21 @@
                 </block>
             </block>
         </referenceBlock>
-
+        <referenceBlock name="footer-static-links">
+            <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
+                <argument name="template" xsi:type="string">Bss_HyvaCompatBase::footer/links.phtml</argument>
+            </action>
+            <block name="footer.link-company"
+                   as="footer_link-company"
+                   template="Bss_HyvaCompatBase::footer/link/link-company.phtml"
+                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+            </block>
+            <block name="footer.link-legal"
+                   as="footer_link-legal"
+                   template="Bss_HyvaCompatBase::footer/link/link-legal.phtml"
+                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+            </block>
+        </referenceBlock>
         <referenceContainer name="before.body.end">
             <block name="bss.XMLHttpRequest.response.handler" template="Bss_HyvaCompatBase::page/js/xmlHttpRequest-handler.phtml" />
         </referenceContainer>

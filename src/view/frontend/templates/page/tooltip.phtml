@@ -60,6 +60,7 @@ $modalMobileWidth = $block->getTooltipWidth('mobile');
                         this.modalWidthMobile :
                         `${this.modalWidth}px`;
 
+                    tooltipIndicator.style.marginLeft = '0';
                     // Trường hợp bị tràn tooltip ra ngoài
                     if (whatIsThisPos.left + this.modalWidth > screenW) {
                         tooltipContentD.style['left'] = `-${this.modalWidth - (screenW - whatIsThisPos.left)}px`;
@@ -74,6 +75,7 @@ $modalMobileWidth = $block->getTooltipWidth('mobile');
                         // trường hợp bình thường
                         tooltipContentD.style['left'] = 0;
                         tooltipIndicator.style.left = 'auto';
+                        tooltipIndicator.style.marginLeft = '1rem';
                     }
                 }
             }

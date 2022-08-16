@@ -23,6 +23,9 @@ use Magento\Framework\View\Element\Template;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
+
+$baseVm = $viewModels->require(\Bss\HyvaCompatBase\ViewModel\Base::class);
+$store = $baseVm->getStore();
 ?>
 
 <script>
@@ -35,14 +38,22 @@ use Magento\Framework\View\Element\Template;
             return response.json();
         } else {
             // Check if result is Promise then throw to new Error
-            let defaultErrMsg = '<?= __('Something went wrong. Please contact the website admin for more information.') ?>';
-            let result = response.json();
+            let defaultErrMsg = '<?= __('Something went wrong. Please contact the website admin for more information.') ?>',
+                result;
+            result = response.text();
             if (typeof result?.then === 'function') {
                 result.then(res => {
+                    let errorMessage;
+                    try {
+                        errorMessage = JSON.parse(res);
+                        errorMessage = errorMessage?.message ? errorMessage.message : defaultErrMsg;
+                    } catch (e) {
+                        errorMessage = defaultErrMsg;
+                    }
                     window.dispatchMessages([
                         {
                             type: 'error',
-                            text: res?.message ? res.message : defaultErrMsg
+                            text: errorMessage
                         }
                     ], 3000);
                 });
@@ -55,7 +66,7 @@ use Magento\Framework\View\Element\Template;
     if (typeof window.buildRestAPIUrl !== 'function') {
         window.buildRestAPIUrl = function (url, params = {}) {
             const method = 'rest',
-                storeCode = window.checkoutConfig.storeCode,
+                storeCode = '<?= $escaper->escapeJs($store->getCode()) ?>',
                 version = 'V1',
                 serviceUrl = ':method/:storeCode/:version';
 
@@ -89,6 +100,43 @@ use Magento\Framework\View\Element\Template;
                 Object.prototype.toString.call(obj) === '[object Object]' &&
                 JSON.stringify(obj) === '{}'
             );
+        }
+    }
+
+    if (typeof window.mergeDeep !== 'function') {
+        /**
+         * Deep merge two objects.
+         *
+         * @param target
+         * @param sources
+         * @returns {*}
+         */
+        window.mergeDeep = (target, ...sources) => {
+            /**
+             * Simple object check.
+             *
+             * @param item
+             * @returns {boolean}
+             */
+            const isObject = (item) => {
+                return (item && typeof item === 'object' && !Array.isArray(item));
+            };
+
+            if (!sources.length) return target;
+            const source = sources.shift();
+
+            if (isObject(target) && isObject(source)) {
+                for (const key in source) {
+                    if (isObject(source[key])) {
+                        if (!target[key]) Object.assign(target, { [key]: {} });
+                        mergeDeep(target[key], source[key]);
+                    } else {
+                        Object.assign(target, { [key]: source[key] });
+                    }
+                }
+            }
+
+            return mergeDeep(target, ...sources);
         }
     }
 </script>

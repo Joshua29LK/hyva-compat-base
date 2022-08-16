@@ -25,6 +25,7 @@
                 <argument name="template" xsi:type="string">Bss_HyvaCompatBase::product/list/item.phtml</argument>
             </action>
 
+            <block name="product.list.item.image" template="Bss_HyvaCompatBase::product/list/image.phtml" />
             <block name="product.info.actions.addtocart" template="Bss_HyvaCompatBase::product/components/addtocart.phtml" />
             <block name="product.info.actions.addtowishlist" template="Bss_HyvaCompatBase::product/components/addtowishlist.phtml" />
             <block name="product.info.actions.addtocompare" template="Bss_HyvaCompatBase::product/components/addtocompare.phtml" />

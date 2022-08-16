@@ -52,3 +52,6 @@
         // Other code
         ```
       `componentName` có thể là tên function js mà **component** cần giao tiếp khai báo trogn **x-data** hoặc là id của thẻ chứa x-data (ở trên là `submit_form`), hoặc là giá trị `x-id`
+3. ### Thêm thư viện Splide Js
+   * Thư viện được sử dụng để làm slide
+   * Không ảnh hưởng tới LCP và CLS
