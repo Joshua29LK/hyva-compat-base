@@ -21,25 +21,26 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="header-content">
-            <action method="setTemplate">
+            <action method="setTemplate" ifconfig="hyva_compat_base/rewrite_template/header_content">
                 <argument name="template" xsi:type="string">Bss_HyvaCompatBase::html/header.phtml</argument>
             </action>
 
-            <block name="header-content.compare-link" template="Bss_HyvaCompatBase::header/compare-link.phtml" />
+            <block name="header-content.compare-link" ifconfig="hyva_compat_base/rewrite_template/header_content"
+                   template="Bss_HyvaCompatBase::header/compare-link.phtml" />
             <container name="cart.icon.before" />
             <container name="cart.icon.after" />
             <container name="cart.drawer.after" />
         </referenceBlock>
 
         <referenceBlock name="header.customer">
-             <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
+             <action method="setTemplate" ifconfig="hyva_compat_base/rewrite_template/customer_menu">
                  <argument name="template" xsi:type="string">Bss_HyvaCompatBase::header/customer-menu.phtml</argument>
              </action>
 
             <block name="customer.logged-menu"
                    as="customer_logged-menu"
                    template="Bss_HyvaCompatBase::header/customer-menu/menu-container.phtml"
-                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+                   ifconfig="hyva_compat_base/rewrite_template/customer_menu">
                 <block class="Bss\HyvaCompatBase\Block\Customer\Menu\CustomerMenuLink"
                        name="customer.account"
                        as="customer_account"
@@ -102,7 +103,7 @@
             <block name="customer.not-login-menu"
                    as="customer_not-login-menu"
                    template="Bss_HyvaCompatBase::header/customer-menu/menu-container.phtml"
-                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+                   ifconfig="hyva_compat_base/rewrite_template/customer_menu">
                 <block class="Bss\HyvaCompatBase\Block\Customer\Menu\CustomerMenuLink"
                        name="customer.login"
                        as="customer_login"
@@ -128,18 +129,18 @@
             </block>
         </referenceBlock>
         <referenceBlock name="footer-static-links">
-            <action method="setTemplate" ifconfig="hyva_compat_base/general/bss_module_enabled">
+            <action method="setTemplate" ifconfig="hyva_compat_base/rewrite_template/footer_static_link">
                 <argument name="template" xsi:type="string">Bss_HyvaCompatBase::footer/links.phtml</argument>
             </action>
             <block name="footer.link-company"
                    as="footer_link-company"
                    template="Bss_HyvaCompatBase::footer/link/link-company.phtml"
-                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+                   ifconfig="hyva_compat_base/rewrite_template/footer_static_link">
             </block>
             <block name="footer.link-legal"
                    as="footer_link-legal"
                    template="Bss_HyvaCompatBase::footer/link/link-legal.phtml"
-                   ifconfig="hyva_compat_base/general/bss_module_enabled">
+                   ifconfig="hyva_compat_base/rewrite_template/footer_static_link">
             </block>
         </referenceBlock>
         <referenceContainer name="before.body.end">

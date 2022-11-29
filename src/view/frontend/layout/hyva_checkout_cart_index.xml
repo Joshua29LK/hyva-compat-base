@@ -20,10 +20,10 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="crosssell">
-            <arguments>
+        <referenceBlock name="crosssell" >
+            <action method="setTemplate" ifconfig="hyva_compat_base/rewrite_template/product_list_item">
                 <argument name="item_template" xsi:type="string">Bss_HyvaCompatBase::product/list/item.phtml</argument>
-            </arguments>
+            </action>
         </referenceBlock>
     </body>
 </page>

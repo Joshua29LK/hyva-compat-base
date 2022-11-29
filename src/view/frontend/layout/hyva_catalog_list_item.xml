@@ -21,14 +21,18 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="product_list_item">
-            <action method="setTemplate">
+            <action method="setTemplate" ifconfig="hyva_compat_base/rewrite_template/product_list_item">
                 <argument name="template" xsi:type="string">Bss_HyvaCompatBase::product/list/item.phtml</argument>
             </action>
 
-            <block name="product.list.item.image" template="Bss_HyvaCompatBase::product/list/image.phtml" />
-            <block name="product.info.actions.addtocart" template="Bss_HyvaCompatBase::product/components/addtocart.phtml" />
-            <block name="product.info.actions.addtowishlist" template="Bss_HyvaCompatBase::product/components/addtowishlist.phtml" />
-            <block name="product.info.actions.addtocompare" template="Bss_HyvaCompatBase::product/components/addtocompare.phtml" />
+            <block name="product.list.item.image" ifconfig="hyva_compat_base/rewrite_template/product_list_item"
+                   template="Bss_HyvaCompatBase::product/list/image.phtml" />
+            <block name="product.info.actions.addtocart" ifconfig="hyva_compat_base/rewrite_template/product_list_item"
+                   template="Bss_HyvaCompatBase::product/components/addtocart.phtml" />
+            <block name="product.info.actions.addtowishlist" ifconfig="hyva_compat_base/rewrite_template/product_list_item"
+                   template="Bss_HyvaCompatBase::product/components/addtowishlist.phtml" />
+            <block name="product.info.actions.addtocompare" ifconfig="hyva_compat_base/rewrite_template/product_list_item"
+                   template="Bss_HyvaCompatBase::product/components/addtocompare.phtml" />
 
             <container name="product.info.details.before" />
             <container name="product.info.details.after" />
