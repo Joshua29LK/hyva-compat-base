@@ -2,7 +2,7 @@
   "name": "bsscommerce/hyva-compat-base",
   "description": "Base module for Hyvä Compat Modules",
   "type": "magento2-module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "require": {
     "magento/framework": "*",
     "hyva-themes/magento2-theme-module": "*"
