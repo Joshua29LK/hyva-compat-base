@@ -47,7 +47,7 @@ $modalMobileWidth = $block->getTooltipWidth('mobile');
                     $el = this.$el;
                 }
 
-                const screenW = window.screen.availWidth;
+                const screenW = window.innerWidth || window.screen.availWidth;
                 const tooltipContentD = $el.querySelector('[bss-tooltip-<?= $escaper->escapeHtmlAttr($uniqueId) ?>-content]');
                 const tooltipIndicator = tooltipContentD.querySelector('.tooltip-indicator');
                 const whatIsThisPos = $el.getBoundingClientRect();
